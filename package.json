@@ -1,0 +1,11 @@
+{
+  "name": "Attendance Marking System",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yekeen Toyyib",
+  "license": "ISC",
+  "description": "Development of an attendance marking system that ensures students can onlymark attendance when they are physically present in the class vicinity, and only during the class duration to sanitise academics"
+}
