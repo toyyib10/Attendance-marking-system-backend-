@@ -7,5 +7,12 @@
   },
   "author": "Yekeen Toyyib",
   "license": "ISC",
-  "description": "Development of an attendance marking system that ensures students can onlymark attendance when they are physically present in the class vicinity, and only during the class duration to sanitise academics"
+  "description": "Development of an attendance marking system that ensures students can onlymark attendance when they are physically present in the class vicinity, and only during the class duration to sanitise academics",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.4"
+  }
 }
