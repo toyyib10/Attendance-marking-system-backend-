@@ -1,7 +1,6 @@
-const adminModel = require("../models/model.admin");
+const adminModel = require("../models/admin.model");
 
 const adminSignup = (req, res) => {
-    console.log(req.body);
     res.send(req.body);
     const form = new adminModel(req.body);
     form.save().then((result) => {
