@@ -22,6 +22,16 @@ adminShcema.pre("save",function(next){
   });
 });
 
+adminShcema.methods.validatePassword = function(password,callback){
+  bcrypt.compare(password, this.password, (err,same) => {
+    if (!err) {
+      callback(err,same)
+    } else {
+      next();
+    }
+  });
+}
+
 const adminModel = mongoose.model("All_admins_db", adminShcema);
 
 module.exports = adminModel;
