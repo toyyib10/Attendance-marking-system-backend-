@@ -1,8 +1,8 @@
-const adminModel = require("../models/admin.model");
+const studentModel = require("../models/student.model");
 
-const adminSignup = (req, res) => {
+const studentSignup = (req, res) => {
     res.send(req.body);
-    const form = new adminModel(req.body);
+    const form = new studentModel(req.body);
     form.save().then((result) => {
       res.status(200).send("Data has been saved successfully",result);
     }).catch((err) => {
@@ -14,11 +14,11 @@ const adminSignup = (req, res) => {
     })
 }
 
-const adminSignin = (req, res) => {
-  const {adminEmail, password} = req.body;
-  adminModel.findOne({email:adminEmail}, {firstName: 1, lastName: 1, email: 1, password: 1}).then((admin) => {
-    if (admin){
-      admin.validatePassword(password, (err, same) => {
+const studentSignin = (req, res) => {
+  const {studentEmail, password} = req.body;
+  studentModel.findOne({email:studentEmail}, {firstName: 1, lastName: 1, email: 1, password: 1}).then((student) => {
+    if (student){
+      student.validatePassword(password, (err, same) => {
         if (!same) {
           res.status(554).send("invalid email or password");
         } else {
@@ -32,4 +32,4 @@ const adminSignin = (req, res) => {
   });
 }
 
-module.exports = {adminSignup, adminSignin};
+module.exports = {studentSignup, studentSignin};
