@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 mongoose.connect(URI).then(() => {
   console.log("Database connected successfully");
 }).catch(() => {
-  console.log("Connection unsuccessful");
+  console.log("Database Connection unsuccessful");
 })
 
 app.use(cors());
