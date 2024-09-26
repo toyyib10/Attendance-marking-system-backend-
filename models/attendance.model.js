@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
 const attendanceSchema = mongoose.Schema({
-  firstName : {type: String, required:true},
-  lastName : {type: String, required:true},
-  matricNumber : {type: String, required:true},
+  firstName : {type: String},
+  lastName : {type: String},
+  matricNumber : {type: String},
 })
 
 const createSchema = mongoose.Schema({
   studentAttendance : [attendanceSchema],
-  locationData : { latitude:{type: Number, required: true}, longitude:{type: Number, required:true}},
+  locationData : { latitude:{type: Number}, longitude:{type: Number}},
   classTime : {type: String},
   classPin : {type: String},
   course : {type: String},

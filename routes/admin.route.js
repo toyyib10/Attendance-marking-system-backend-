@@ -3,6 +3,6 @@ const {adminSignup, adminSignin, adminCreate} = require("../controllers/admin.co
 
 admin.post("/signup", adminSignup);
 admin.post("/signin", adminSignin);
-admin.post("/createClass",adminCreate);
+admin.post("/createAttendance",adminCreate);
 
 module.exports = admin;

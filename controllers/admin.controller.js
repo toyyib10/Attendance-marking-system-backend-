@@ -34,8 +34,13 @@ const adminSignin = (req, res) => {
 }
 
 const adminCreate = (req, res) => {
-  const classInfo = req.body;
-  console.log(req.body);
+  console.log(req.body.locationData)
+  const form = new attendanceModel(req.body);
+  form.save().then((result) => {
+    res.status(200).send(result);
+  }).catch((err) => {
+    res.status(500).send(err);
+  });
 }
 
 module.exports = {adminSignup, adminSignin, adminCreate};
