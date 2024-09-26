@@ -1,5 +1,5 @@
 const adminModel = require("../models/admin.model");
-const classModel = require("../models/class.model");
+const attendanceModel = require("../models/attendance.model");
 
 const adminSignup = (req, res) => {
     res.send(req.body);
@@ -34,7 +34,8 @@ const adminSignin = (req, res) => {
 }
 
 const adminCreate = (req, res) => {
-
+  const classInfo = req.body;
+  console.log(req.body);
 }
 
 module.exports = {adminSignup, adminSignin, adminCreate};

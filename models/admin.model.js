@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const adminShcema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
   firstName : {type: String, required:true},
   lastName : {type: String, required:true},
   email : {type: String, required:true, unique: true},
@@ -11,7 +11,7 @@ const adminShcema = mongoose.Schema({
 
 let saltRound = process.env.SALT_ROUND;
 
-adminShcema.pre("save",function(next){
+adminSchema.pre("save",function(next){
   bcrypt.hash(this.password, saltRound, (err, hashedPassword) => {
     if (err) {
       console.log("password couldn't be hashed")
@@ -22,7 +22,7 @@ adminShcema.pre("save",function(next){
   });
 });
 
-adminShcema.methods.validatePassword = function(password,callback){
+adminSchema.methods.validatePassword = function(password,callback){
   bcrypt.compare(password, this.password, (err,same) => {
     if (!err) {
       callback(err,same)
@@ -32,6 +32,6 @@ adminShcema.methods.validatePassword = function(password,callback){
   });
 }
 
-const adminModel = mongoose.model("All_admins_db", adminShcema);
+const adminModel = mongoose.model("All_admins_db", adminSchema);
 
 module.exports = adminModel;

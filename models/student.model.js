@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const studentShcema = mongoose.Schema({
+const studentSchema = mongoose.Schema({
   firstName : {type: String, required:true},
   lastName : {type: String, required:true},
   matricNumber : {type: String, required:true},
@@ -12,7 +12,7 @@ const studentShcema = mongoose.Schema({
 
 let saltRound = process.env.SALT_ROUND;
 
-studentShcema.pre("save",function(next){
+studentSchema.pre("save",function(next){
   bcrypt.hash(this.password, saltRound, (err, hashedPassword) => {
     if (err) {
       console.log("password couldn't be hashed")
@@ -23,7 +23,7 @@ studentShcema.pre("save",function(next){
   });
 });
 
-studentShcema.methods.validatePassword = function(password,callback){
+studentSchema.methods.validatePassword = function(password,callback){
   bcrypt.compare(password, this.password, (err,same) => {
     if (!err) {
       callback(err,same)
@@ -33,6 +33,6 @@ studentShcema.methods.validatePassword = function(password,callback){
   });
 }
 
-const studentModel = mongoose.model("All_students_db", studentShcema);
+const studentModel = mongoose.model("All_students_db", studentSchema);
 
 module.exports = studentModel;
