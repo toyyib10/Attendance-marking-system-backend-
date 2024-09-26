@@ -7,7 +7,7 @@ const attendanceSchema = mongoose.Schema({
 })
 
 const createSchema = mongoose.Schema({
-  studentAttendance : [attendanceShcema],
+  studentAttendance : [attendanceSchema],
   locationData : { latitude:{type: Number, required: true}, longitude:{type: Number, required:true}},
   classTime : {type: String},
   classPin : {type: String},
@@ -17,7 +17,7 @@ const createSchema = mongoose.Schema({
 });
 
 
-const attendanceModel = mongoose.model("All_students_db", createSchema);
+const attendanceModel = mongoose.model("All_attendance_db", createSchema);
 
 module.exports = attendanceModel;
 // createModel.updateOne(,{$push: {}})

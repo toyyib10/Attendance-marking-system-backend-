@@ -9,12 +9,12 @@ const adminSchema = mongoose.Schema({
   date : { type: Date, default: Date.now },
 });
 
-let saltRound = process.env.SALT_ROUND;
+let saltRound = 10;
 
 adminSchema.pre("save",function(next){
   bcrypt.hash(this.password, saltRound, (err, hashedPassword) => {
     if (err) {
-      console.log("password couldn't be hashed")
+      console.log(err)
     } else {
       this.password = hashedPassword;
       next();

@@ -2,34 +2,34 @@ const adminModel = require("../models/admin.model");
 const attendanceModel = require("../models/attendance.model");
 
 const adminSignup = (req, res) => {
-    res.send(req.body);
     const form = new adminModel(req.body);
     form.save().then((result) => {
-      res.status(200).send("Data has been saved successfully",result);
+      res.status(200).send(result);
     }).catch((err) => {
       if (err.code == 11000) {
-        res.status(550).send("Email already exist");
-      } else {
+        res.send("Email already exist");
+      } 
+      else {
         res.status(500).send("Data has not been saved");
       }
-    })
+    });
 }
 
 const adminSignin = (req, res) => {
-  const {adminEmail, password} = req.body;
-  adminModel.findOne({email:adminEmail}, {firstName: 1, lastName: 1, email: 1, password: 1}).then((admin) => {
+  adminModel.findOne({email:req.body.email}, {firstName: 1, lastName: 1, email: 1, password: 1, _id: 0}).then((admin) => {
     if (admin){
-      admin.validatePassword(password, (err, same) => {
+      admin.validatePassword(req.body.password, (err, same) => {
         if (!same) {
           res.status(554).send("invalid email or password");
         } else {
-          res.status(200).send("sign in successful");
-
+          res.status(200).send(admin);
         }
       })
+    } else {
+      res.status(554).send("invalid email or password");
     }
   }).catch((err) => {
-    res.status(554).send("invalid email or password");
+    res.status(500).send("An error has occurred");
   });
 }
 

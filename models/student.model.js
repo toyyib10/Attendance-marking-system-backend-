@@ -4,13 +4,13 @@ const bcrypt = require("bcryptjs");
 const studentSchema = mongoose.Schema({
   firstName : {type: String, required:true},
   lastName : {type: String, required:true},
-  matricNumber : {type: String, required:true},
+  matricNumber : {type: String, required:true, unique: true},
   email : {type: String, required:true, unique: true},
   password : {type: String, required:true},
   date : { type: Date, default: Date.now },
 });
 
-let saltRound = process.env.SALT_ROUND;
+let saltRound = 10;
 
 studentSchema.pre("save",function(next){
   bcrypt.hash(this.password, saltRound, (err, hashedPassword) => {
