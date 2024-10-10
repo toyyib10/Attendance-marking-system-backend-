@@ -33,14 +33,28 @@ const adminSignin = (req, res) => {
   });
 }
 
-const adminCreate = (req, res) => {
-  console.log(req.body.locationData)
+const createAttendance = (req, res) => {
+  console.log(req.body)
   const form = new attendanceModel(req.body);
   form.save().then((result) => {
     res.status(200).send(result);
   }).catch((err) => {
     res.status(500).send(err);
   });
+} 
+
+const getAllAttendance = (req, res) => {
+  attendanceModel.find({email:req.query.email}).then((result) => {
+    res.status(200).send(result);
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send("Internal server error");
+  })
 }
 
-module.exports = {adminSignup, adminSignin, adminCreate};
+const startAttendance = (req, res) => {
+  // attendanceModel.findOneAndUpdate({_id:req.body._id})
+}
+
+
+module.exports = {adminSignup, adminSignin, createAttendance, startAttendance, getAllAttendance};
