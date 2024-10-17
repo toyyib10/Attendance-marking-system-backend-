@@ -1,5 +1,6 @@
 const adminModel = require("../models/admin.model");
 const attendanceModel = require("../models/attendance.model");
+const crypto = require("crypto");
 
 const adminSignup = (req, res) => {
     const form = new adminModel(req.body);
@@ -53,7 +54,24 @@ const getAllAttendance = (req, res) => {
 }
 
 const startAttendance = (req, res) => {
-  // attendanceModel.findOneAndUpdate({_id:req.body._id})
+  const createPin = () => {
+    const generatePin = () => {
+      return crypto.randomInt(100000, 999999).toString();
+    }
+    const pin = generatePin();
+    attendanceModel.findOne({classPin: pin},{classPin: 1}).then((result) => {
+      if (result.pin == pin) {
+        createPin();
+      } else {
+        attendanceModel.findOneAndUpdate({_id:req.body._id}, {$set : {locationData:req.body.location, classPin:pin}}).then((result) => {
+          res.status(200).send(result);
+        }).catch(() => {
+          res.status(500).send("Internal server error")
+        })
+      }
+    })
+  }
+  createPin();
 }
 
 

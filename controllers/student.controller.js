@@ -1,4 +1,5 @@
 const studentModel = require("../models/student.model");
+const attendanceModel = require("../models/attendance.model");
 
 const studentSignup = (req, res) => {
     const form = new studentModel(req.body);
@@ -29,4 +30,8 @@ const studentSignin = (req, res) => {
   });
 }
 
-module.exports = {studentSignup, studentSignin};
+const markAttendance = (req, res) => {
+
+}
+
+module.exports = {studentSignup, studentSignin, markAttendance};
