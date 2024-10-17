@@ -31,7 +31,7 @@ const studentSignin = (req, res) => {
 }
 
 const markAttendance = (req, res) => {
-
+  // student location, pin, check for the location, mark right or wrong, return data to client
 }
 
 module.exports = {studentSignup, studentSignin, markAttendance};
