@@ -8,7 +8,7 @@ const adminSignup = (req, res) => {
       res.status(200).send(result);
     }).catch((err) => {
       if (err.code == 11000) {
-        res.send("Email already exist");
+        res.status(409).send("Email already exist");
       } 
       else {
         res.status(500).send("Data has not been saved");
